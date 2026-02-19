@@ -40,6 +40,8 @@ When performing these actions, ALWAYS invoke the corresponding skill FIRST:
 | Creating API hooks or data fetching | `tanstack-5` |
 | Creating Zod schemas | `zod-4` |
 | Creating forms, using useForm, using FormField or FormControl, handling form submission, form validation, form with proqio-ui | `react-hook-form` |
+| Creating index.ts, writing re-exports, importing from a folder path | `no-barrel-files` |
+| Designing a reusable component with sub-parts, building a component with shared internal state, creating a component system | `compound-components` |
 | Fetching data from API | `tanstack-5` |
 | Fixing bug | `tdd` |
 | Implementing feature | `tdd` |
