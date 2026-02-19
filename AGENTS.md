@@ -10,11 +10,12 @@
 
 Use these skills for detailed patterns on-demand:
 
-### Generic Skills (Any Project)
+### Generic Skills
 | Skill | Description | URL |
 |-------|-------------|-----|
 | `typescript` | Const types, flat interfaces, utility types | [SKILL.md](skills/typescript/SKILL.md) |
 | `react-19` | No useMemo/useCallback, React Compiler | [SKILL.md](skills/react-19/SKILL.md) |
+| `react-compiler` | Rules of React, build-time memoization, compiler migration | [SKILL.md](skills/react-compiler/SKILL.md) |
 | `tailwind-4` | cn() utility, no var() in className | [SKILL.md](skills/tailwind-4/SKILL.md) |
 | `tanstack-5` | queryOptions, useQuery, useMutation, useSuspenseQuery, infinite queries (v5) | [SKILL.md](skills/tanstack-5/SKILL.md) |
 | `playwright` | Page Object Model, MCP workflow, selectors | [SKILL.md](skills/playwright/SKILL.md) |
@@ -35,29 +36,22 @@ When performing these actions, ALWAYS invoke the corresponding skill FIRST:
 
 | Action | Skill |
 |--------|-------|
-| After creating/modifying a skill | `skill-sync` |
 | Creating API hooks or data fetching | `tanstack-5` |
 | Creating Zod schemas | `zod-4` |
-| Creating new skills | `skill-creator` |
 | Fetching data from API | `tanstack-5` |
 | Fixing bug | `tdd` |
 | Implementing feature | `tdd` |
 | Managing server state | `tanstack-5` |
 | Modifying component | `tdd` |
+| Optimizing React components, enabling React Compiler, migrating manual memoization | `react-compiler` |
 | Refactoring code | `tdd` |
-| Regenerate AGENTS.md Auto-invoke tables (sync.sh) | `skill-sync` |
-| Testing hooks or utilities | `vitest` |
-| Troubleshoot why a skill is missing from AGENTS.md auto-invoke | `skill-sync` |
 | Using Zustand stores | `zustand-5` |
 | Using useQuery or useMutation | `tanstack-5` |
 | Working on task | `tdd` |
 | Working with Tailwind classes | `tailwind-4` |
 | Writing Playwright E2E tests | `playwright` |
-| Writing React component tests | `vitest` |
 | Writing React components | `react-19` |
 | Writing TypeScript types/interfaces | `typescript` |
-| Writing Vitest tests | `vitest` |
-| Writing unit tests for UI | `vitest` |
 
 ---
 
