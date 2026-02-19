@@ -39,6 +39,7 @@ When performing these actions, ALWAYS invoke the corresponding skill FIRST:
 |--------|-------|
 | Creating API hooks or data fetching | `tanstack-5` |
 | Creating Zod schemas | `zod-4` |
+| Creating forms, using useForm, using FormField or FormControl, handling form submission, form validation, form with proqio-ui | `react-hook-form` |
 | Fetching data from API | `tanstack-5` |
 | Fixing bug | `tdd` |
 | Implementing feature | `tdd` |
@@ -47,15 +48,13 @@ When performing these actions, ALWAYS invoke the corresponding skill FIRST:
 | Optimizing React components, enabling React Compiler, migrating manual memoization | `react-compiler` |
 | Refactoring code | `tdd` |
 | Using Zustand stores | `zustand-5` |
+| Using proqio-ui components, building UI components, importing from proqio-ui | `proqio-ui` |
 | Using useQuery or useMutation | `tanstack-5` |
 | Working on task | `tdd` |
 | Working with Tailwind classes | `tailwind-4` |
 | Writing Playwright E2E tests | `playwright` |
 | Writing React components | `react-19` |
 | Writing TypeScript types/interfaces | `typescript` |
-| Using proqio-ui components | `proqio-ui` |
-| Building UI components in src/components | `proqio-ui` |
-| Choosing between custom vs library components | `proqio-ui` |
 
 ---
 
