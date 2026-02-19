@@ -3,11 +3,11 @@ name: no-barrel-files
 description: Avoid barrel files (index.ts re-export files) in app code. Trigger when creating an index.ts, writing re-exports, or importing from a directory instead of a file.
 license: Apache-2.0
 metadata:
-  author: Infinitus
-  version: "1.0"
-  scope: [frontend, ui, api]
-  auto_invoke: "Creating index.ts, writing re-exports, importing from a folder path"
-  allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
+    author: Infinitus
+    version: '1.0'
+    scope: [frontend, ui, api]
+    auto_invoke: 'Creating index.ts, writing re-exports, importing from a folder path'
+    allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
 ---
 
 ## Rule
@@ -16,12 +16,12 @@ metadata:
 
 ## Why
 
-| Problem | Effect |
-|---------|--------|
-| Vite/bundler resolves longer module chains | Slower dev server cold start |
-| All exports in one entry point | Tree-shaking becomes harder to verify |
-| TypeScript processes extra indirection | Slower type checking |
-| Shared re-export files | Common root cause of circular dependencies |
+| Problem                                    | Effect                                     |
+| ------------------------------------------ | ------------------------------------------ |
+| Vite/bundler resolves longer module chains | Slower dev server cold start               |
+| All exports in one entry point             | Tree-shaking becomes harder to verify      |
+| TypeScript processes extra indirection     | Slower type checking                       |
+| Shared re-export files                     | Common root cause of circular dependencies |
 
 ## ❌ Barrel Pattern (NEVER do this in app code)
 
@@ -60,10 +60,12 @@ Is this app-internal code?                               → NO  → import dire
 ```
 
 **Valid examples of `index.ts`:**
+
 - `proqio-ui` package entry (`dist/src/main.d.ts`) — library public API
 - An npm package you are publishing — consumers need a stable entry point
 
 **Invalid examples (remove these):**
+
 - `src/components/index.ts` — re-exports every component
 - `src/hooks/index.ts` — re-exports every hook
 - `src/utils/index.ts` — re-exports every utility
@@ -76,6 +78,7 @@ grep -rl "^export \{" src --include="index.ts"
 ```
 
 For each one found:
+
 1. Delete the `index.ts`
 2. Update all imports to point to the actual file
 

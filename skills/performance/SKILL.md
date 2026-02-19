@@ -3,16 +3,16 @@ name: performance
 description: Frontend performance patterns for React 19 + Vite + TanStack Query + Zustand. Trigger when creating new pages/routes (lazy loading), optimizing bundle size, configuring Vite build, adding virtualization to long lists, or reducing unnecessary network requests.
 license: Apache-2.0
 metadata:
-  author: Infinitus
-  version: "1.0"
-  scope: [frontend]
-  auto_invoke:
-    - "Creating new pages or routes"
-    - "Optimizing bundle size or build configuration"
-    - "Adding virtualization to long lists or tables"
-    - "Configuring Vite build"
-    - "Optimizing frontend performance"
-  allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
+    author: Infinitus
+    version: '1.0'
+    scope: [frontend]
+    auto_invoke:
+        - 'Creating new pages or routes'
+        - 'Optimizing bundle size or build configuration'
+        - 'Adding virtualization to long lists or tables'
+        - 'Configuring Vite build'
+        - 'Optimizing frontend performance'
+    allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
 ---
 
 ## When to Use
@@ -34,25 +34,21 @@ Every page/view must be loaded lazily. Vite generates a separate `.js` chunk per
 
 ```tsx
 // src/App.tsx (or your router file)
-import { lazy, Suspense } from "react";
+import { lazy, Suspense } from 'react';
 
 // ✅ One lazy() per page
-const DashboardPage = lazy(() => import("./pages/DashboardPage"));
-const SettingsPage  = lazy(() => import("./pages/SettingsPage"));
-const ReportsPage   = lazy(() => import("./pages/ReportsPage"));
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const SettingsPage = lazy(() => import('./pages/SettingsPage'));
+const ReportsPage = lazy(() => import('./pages/ReportsPage'));
 
 function App() {
-  return (
-    <Suspense fallback={<PageSkeleton />}>
-      {/* your router here */}
-    </Suspense>
-  );
+    return <Suspense fallback={<PageSkeleton />}>{/* your router here */}</Suspense>;
 }
 ```
 
 ```tsx
 // ❌ Never import pages eagerly at the top level
-import DashboardPage from "./pages/DashboardPage"; // defeats code splitting
+import DashboardPage from './pages/DashboardPage'; // defeats code splitting
 ```
 
 **Rule:** shared/small components (buttons, inputs, cards) → normal import. Pages → always `lazy()`.
@@ -117,23 +113,23 @@ Run `pnpm build` → `stats.html` opens automatically showing a treemap of all c
 
 ```ts
 // src/api/queries/findings.ts
-import { queryOptions } from "@tanstack/react-query";
+import { queryOptions } from '@tanstack/react-query';
 
 export const findingQueries = {
-  list: (filters: FindingFilters) =>
-    queryOptions({
-      queryKey: ["findings", filters],
-      queryFn: () => fetchFindings(filters),
-      staleTime: 5 * 60_000,   // fresh for 5 min → no refetch on remount
-      gcTime: 10 * 60_000,     // kept in cache 10 min after unmount
-    }),
+    list: (filters: FindingFilters) =>
+        queryOptions({
+            queryKey: ['findings', filters],
+            queryFn: () => fetchFindings(filters),
+            staleTime: 5 * 60_000, // fresh for 5 min → no refetch on remount
+            gcTime: 10 * 60_000, // kept in cache 10 min after unmount
+        }),
 
-  detail: (id: string) =>
-    queryOptions({
-      queryKey: ["findings", id],
-      queryFn: () => fetchFinding(id),
-      staleTime: 60_000,
-    }),
+    detail: (id: string) =>
+        queryOptions({
+            queryKey: ['findings', id],
+            queryFn: () => fetchFinding(id),
+            staleTime: 60_000,
+        }),
 };
 ```
 
@@ -142,13 +138,13 @@ export const findingQueries = {
 ```ts
 // src/main.tsx
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 60_000,   // 1 min baseline for all queries
-      gcTime: 5 * 60_000,
-      retry: 1,
+    defaultOptions: {
+        queries: {
+            staleTime: 60_000, // 1 min baseline for all queries
+            gcTime: 5 * 60_000,
+            retry: 1,
+        },
     },
-  },
 });
 ```
 
@@ -175,11 +171,9 @@ const { user, settings, theme } = useAppStore();
 const user = useAppStore((state) => state.user);
 
 // ✅ Multiple fields — use useShallow to avoid new object reference each render
-import { useShallow } from "zustand/react/shallow";
+import { useShallow } from 'zustand/react/shallow';
 
-const { name, email } = useAppStore(
-  useShallow((state) => ({ name: state.name, email: state.email }))
-);
+const { name, email } = useAppStore(useShallow((state) => ({ name: state.name, email: state.email })));
 ```
 
 ---
@@ -193,39 +187,42 @@ pnpm add @tanstack/react-virtual
 ```
 
 ```tsx
-import { useVirtualizer } from "@tanstack/react-virtual";
+import { useVirtualizer } from '@tanstack/react-virtual';
 
 function FindingsList({ findings }: { findings: Finding[] }) {
-  const parentRef = useRef<HTMLDivElement>(null);
+    const parentRef = useRef<HTMLDivElement>(null);
 
-  const virtualizer = useVirtualizer({
-    count: findings.length,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 56, // estimated row height in px
-    overscan: 5,            // extra rows above/below viewport
-  });
+    const virtualizer = useVirtualizer({
+        count: findings.length,
+        getScrollElement: () => parentRef.current,
+        estimateSize: () => 56, // estimated row height in px
+        overscan: 5, // extra rows above/below viewport
+    });
 
-  return (
-    <div ref={parentRef} style={{ height: "600px", overflow: "auto" }}>
-      <div style={{ height: `${virtualizer.getTotalSize()}px`, position: "relative" }}>
-        {virtualizer.getVirtualItems().map((virtualRow) => (
-          <div
-            key={virtualRow.key}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              transform: `translateY(${virtualRow.start}px)`,
-              height: `${virtualRow.size}px`,
-            }}
-          >
-            <FindingRow finding={findings[virtualRow.index]} />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    return (
+        <div
+            ref={parentRef}
+            style={{ height: '600px', overflow: 'auto' }}
+        >
+            <div style={{ height: `${virtualizer.getTotalSize()}px`, position: 'relative' }}>
+                {virtualizer.getVirtualItems().map((virtualRow) => (
+                    <div
+                        key={virtualRow.key}
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            transform: `translateY(${virtualRow.start}px)`,
+                            height: `${virtualRow.size}px`,
+                        }}
+                    >
+                        <FindingRow finding={findings[virtualRow.index]} />
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
 }
 ```
 
@@ -237,7 +234,13 @@ function FindingsList({ findings }: { findings: Finding[] }) {
 
 ```tsx
 // ✅ Free, no library needed — browser defers off-screen images
-<img src="/screenshot.png" loading="lazy" alt="..." width={800} height={450} />
+<img
+    src="/screenshot.png"
+    loading="lazy"
+    alt="..."
+    width={800}
+    height={450}
+/>
 
 // Always provide width + height to prevent layout shift (CLS)
 ```
@@ -246,8 +249,8 @@ function FindingsList({ findings }: { findings: Finding[] }) {
 - SVGs used repeatedly → import as React component (inlined, no HTTP request)
 
 ```tsx
-import ViteLogo from "./assets/vite.svg?react"; // Vite's ?react suffix
-<ViteLogo className="h-8 w-8" />
+import ViteLogo from './assets/vite.svg?react'; // Vite's ?react suffix
+<ViteLogo className="h-8 w-8" />;
 ```
 
 ---
@@ -258,23 +261,29 @@ Add to `index.html` so the browser prepares the TCP connection before the app ev
 
 ```html
 <!-- index.html <head> -->
-<link rel="preconnect" href="https://api.your-domain.com" />
-<link rel="dns-prefetch" href="https://api.your-domain.com" />
+<link
+    rel="preconnect"
+    href="https://api.your-domain.com"
+/>
+<link
+    rel="dns-prefetch"
+    href="https://api.your-domain.com"
+/>
 ```
 
 ---
 
 ## Decision Table
 
-| Situation | Action |
-|-----------|--------|
-| Creating a new page | Wrap in `lazy(() => import(...))` |
-| List with >50 rows | Use `@tanstack/react-virtual` |
-| Query refetches too often | Add `staleTime` to `queryOptions` |
-| Component re-renders unexpectedly | Add Zustand selector / `useShallow` |
-| Build size feels large | Run `rollup-plugin-visualizer` |
-| Adding a new large library | Add to `manualChunks` in `vite.config.ts` |
-| Off-screen images loading eagerly | Add `loading="lazy"` |
+| Situation                         | Action                                    |
+| --------------------------------- | ----------------------------------------- |
+| Creating a new page               | Wrap in `lazy(() => import(...))`         |
+| List with >50 rows                | Use `@tanstack/react-virtual`             |
+| Query refetches too often         | Add `staleTime` to `queryOptions`         |
+| Component re-renders unexpectedly | Add Zustand selector / `useShallow`       |
+| Build size feels large            | Run `rollup-plugin-visualizer`            |
+| Adding a new large library        | Add to `manualChunks` in `vite.config.ts` |
+| Off-screen images loading eagerly | Add `loading="lazy"`                      |
 
 ---
 

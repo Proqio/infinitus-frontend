@@ -3,11 +3,11 @@ name: proqio-ui
 description: Proqio UI component library patterns and best practices. Trigger when building UI across the project, importing from proqio-ui, choosing between custom vs library components, or using Button/Dialog/Form/Select/Table/Sidebar and any other Proqio UI component.
 license: Apache-2.0
 metadata:
-  author: Infinitus
-  version: "1.0"
-  scope: [frontend, ui]
-  auto_invoke: "Using proqio-ui components, building UI components, importing from proqio-ui"
-  allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
+    author: Infinitus
+    version: '1.0'
+    scope: [frontend, ui]
+    auto_invoke: 'Using proqio-ui components, building UI components, importing from proqio-ui'
+    allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
 ---
 
 ## Critical Rules
@@ -62,64 +62,71 @@ Need grouped buttons?              → ButtonGroup
 ## All Available Components
 
 ### Actions
-| Component | Key Props | Variants |
-|-----------|-----------|----------|
-| `Button` | `variant`, `intent`, `size`, `loading`, `inverted` | variant: `text\|primary\|outline`; intent: `default\|danger\|warning\|success\|info\|subtle`; size: `xs\|sm\|base\|lg\|xl` |
-| `IconButton` | Same as Button | Same as Button |
-| `LinkButton` | `asChild` | Unstyled, polymorphic |
-| `ButtonGroup` | `orientation` | + `ButtonGroupText`, `ButtonGroupSeparator` |
-| `Toggle` / `ToggleGroup` | — | — |
+
+| Component                | Key Props                                          | Variants                                                                                                                   |
+| ------------------------ | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `Button`                 | `variant`, `intent`, `size`, `loading`, `inverted` | variant: `text\|primary\|outline`; intent: `default\|danger\|warning\|success\|info\|subtle`; size: `xs\|sm\|base\|lg\|xl` |
+| `IconButton`             | Same as Button                                     | Same as Button                                                                                                             |
+| `LinkButton`             | `asChild`                                          | Unstyled, polymorphic                                                                                                      |
+| `ButtonGroup`            | `orientation`                                      | + `ButtonGroupText`, `ButtonGroupSeparator`                                                                                |
+| `Toggle` / `ToggleGroup` | —                                                  | —                                                                                                                          |
 
 ### Inputs
-| Component | Key Props | Notes |
-|-----------|-----------|-------|
-| `TextField` | `leftSlot`, `rightSlot`, `variant`, `size` | Wraps `<input>` |
-| `Textarea` | `maxLength` | Use with `TextareaCounter` |
-| `NumberField` | `variant`, `size` | variant: `outline\|ghost`; size: `base\|compact` |
-| `Checkbox` | `checked`, `onCheckedChange` | Radix primitive |
-| `RadioGroup` / `RadioGroupItem` | — | Radix primitive |
-| `Switch` | `size` | size: `base\|md\|lg` |
+
+| Component                       | Key Props                                  | Notes                                            |
+| ------------------------------- | ------------------------------------------ | ------------------------------------------------ |
+| `TextField`                     | `leftSlot`, `rightSlot`, `variant`, `size` | Wraps `<input>`                                  |
+| `Textarea`                      | `maxLength`                                | Use with `TextareaCounter`                       |
+| `NumberField`                   | `variant`, `size`                          | variant: `outline\|ghost`; size: `base\|compact` |
+| `Checkbox`                      | `checked`, `onCheckedChange`               | Radix primitive                                  |
+| `RadioGroup` / `RadioGroupItem` | —                                          | Radix primitive                                  |
+| `Switch`                        | `size`                                     | size: `base\|md\|lg`                             |
 
 ### Display
-| Component | Key Props | Variants |
-|-----------|-----------|----------|
-| `Badge` | `type`, `theme`, `size` | type: `badge\|tag`; theme: `gray\|light-gray\|orange\|red\|yellow\|green\|blue\|indigo\|purple\|pink\|black`; size: `sm\|lg` |
-| `Callout` | `variant` | `danger\|warning\|success\|info\|subtle` |
-| `Skeleton` | — | Loading placeholder |
-| `LinearProgress` | `size` | size: `default\|compact\|slim`; + `LinearProgressBar`, `LinearProgressValue` |
+
+| Component        | Key Props               | Variants                                                                                                                     |
+| ---------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `Badge`          | `type`, `theme`, `size` | type: `badge\|tag`; theme: `gray\|light-gray\|orange\|red\|yellow\|green\|blue\|indigo\|purple\|pink\|black`; size: `sm\|lg` |
+| `Callout`        | `variant`               | `danger\|warning\|success\|info\|subtle`                                                                                     |
+| `Skeleton`       | —                       | Loading placeholder                                                                                                          |
+| `LinearProgress` | `size`                  | size: `default\|compact\|slim`; + `LinearProgressBar`, `LinearProgressValue`                                                 |
 
 ### Navigation
-| Component | Notes |
-|-----------|-------|
+
+| Component    | Notes                                                                                                                 |
+| ------------ | --------------------------------------------------------------------------------------------------------------------- |
 | `Breadcrumb` | + `BreadcrumbList`, `BreadcrumbItem`, `BreadcrumbLink`, `BreadcrumbPage`, `BreadcrumbSeparator`, `BreadcrumbEllipsis` |
-| `Tabs` | + `TabsList`, `TabsTrigger`, `TabsContent`; supports `collapsible` and tooltip |
-| `Sidebar` | Full compound system — see Sidebar section below |
-| `Stepper` | status: `default\|error\|warning\|success\|in-progress\|not-needed` |
+| `Tabs`       | + `TabsList`, `TabsTrigger`, `TabsContent`; supports `collapsible` and tooltip                                        |
+| `Sidebar`    | Full compound system — see Sidebar section below                                                                      |
+| `Stepper`    | status: `default\|error\|warning\|success\|in-progress\|not-needed`                                                   |
 
 ### Overlay
-| Component | Notes |
-|-----------|-------|
-| `Dialog` | + `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogBody`, `DialogFooter`, `DialogTitle`, `DialogCloseXButton` |
-| `AlertDialog` | For destructive confirmations. + `AlertDialogAction`, `AlertDialogCancel` |
-| `Popover` | + `PopoverTrigger`, `PopoverContent`, `PopoverArrow` |
-| `Tooltip` | Must wrap app in `<TooltipProvider>`. + `TooltipTrigger`, `TooltipContent` |
+
+| Component      | Notes                                                                                                                          |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `Dialog`       | + `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogBody`, `DialogFooter`, `DialogTitle`, `DialogCloseXButton`          |
+| `AlertDialog`  | For destructive confirmations. + `AlertDialogAction`, `AlertDialogCancel`                                                      |
+| `Popover`      | + `PopoverTrigger`, `PopoverContent`, `PopoverArrow`                                                                           |
+| `Tooltip`      | Must wrap app in `<TooltipProvider>`. + `TooltipTrigger`, `TooltipContent`                                                     |
 | `DropdownMenu` | + `DropdownMenuTrigger`, `DropdownMenuContent`, `DropdownMenuItem`, `DropdownMenuCheckboxItem`, `DropdownMenuSwitchItem`, etc. |
-| `ContextMenu` | Right-click triggered version of DropdownMenu |
+| `ContextMenu`  | Right-click triggered version of DropdownMenu                                                                                  |
 
 ### Data
-| Component | Notes |
-|-----------|-------|
-| `Table` | + `TableWrapper`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`, `TableCell` |
-| `Select` | Compound with cmdk search. + `SelectTrigger`, `SelectContent`, `SelectItem`, `SelectCheckboxItem`, etc. |
-| `Calendar` | DayPicker wrapper |
-| `Datepicker` | Full compound. Needs `DatepickerProvider` |
+
+| Component    | Notes                                                                                                   |
+| ------------ | ------------------------------------------------------------------------------------------------------- |
+| `Table`      | + `TableWrapper`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`, `TableCell`                      |
+| `Select`     | Compound with cmdk search. + `SelectTrigger`, `SelectContent`, `SelectItem`, `SelectCheckboxItem`, etc. |
+| `Calendar`   | DayPicker wrapper                                                                                       |
+| `Datepicker` | Full compound. Needs `DatepickerProvider`                                                               |
 
 ### Layout
-| Component | Notes |
-|-----------|-------|
-| `Accordion` | + `AccordionItem`, `AccordionTrigger`, `AccordionContent` |
-| `Collapsible` | + `CollapsibleTrigger`, `CollapsibleContent` |
-| `EmptyState` | + `EmptyStateIcon`, `EmptyStateTitle`, `EmptyStateDescription`, `EmptyStateAction`; variant: `dashed\|solid` |
+
+| Component     | Notes                                                                                                        |
+| ------------- | ------------------------------------------------------------------------------------------------------------ |
+| `Accordion`   | + `AccordionItem`, `AccordionTrigger`, `AccordionContent`                                                    |
+| `Collapsible` | + `CollapsibleTrigger`, `CollapsibleContent`                                                                 |
+| `EmptyState`  | + `EmptyStateIcon`, `EmptyStateTitle`, `EmptyStateDescription`, `EmptyStateAction`; variant: `dashed\|solid` |
 
 ## Compound Component Pattern
 
@@ -368,20 +375,21 @@ proqio-ui with Tailwind 4 requires **two things in `src/index.css`** and nothing
 
 ```css
 /* src/index.css */
-@import "tailwindcss";
-@import 'proqio-ui/theme.css';        /* CSS custom properties / design tokens */
+@import 'tailwindcss';
+@import 'proqio-ui/theme.css'; /* CSS custom properties / design tokens */
 
-@source '../node_modules/proqio-ui/dist';  /* Tailwind scans proqio-ui classes */
+@source '../node_modules/proqio-ui/dist'; /* Tailwind scans proqio-ui classes */
 ```
 
 **Why each line matters:**
 
-| Line | Purpose | What breaks without it |
-|------|---------|----------------------|
-| `@import 'proqio-ui/theme.css'` | Loads all CSS variables (`--tag-brand-*`, `--light-surface-*`, semantic tokens) | Components render without colors/spacing |
-| `@source '../node_modules/proqio-ui/dist'` | Tells Tailwind 4 to include classes used inside proqio-ui | Tailwind purges proqio-ui classes → broken styles in production |
+| Line                                       | Purpose                                                                         | What breaks without it                                          |
+| ------------------------------------------ | ------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `@import 'proqio-ui/theme.css'`            | Loads all CSS variables (`--tag-brand-*`, `--light-surface-*`, semantic tokens) | Components render without colors/spacing                        |
+| `@source '../node_modules/proqio-ui/dist'` | Tells Tailwind 4 to include classes used inside proqio-ui                       | Tailwind purges proqio-ui classes → broken styles in production |
 
 **Valid CSS exports from proqio-ui:**
+
 ```
 proqio-ui/theme.css  → dist/theme.css  ✅ (design tokens, 88KB)
 proqio-ui/           → dist/proqio-ui.js  ✅ (JS bundle with components)

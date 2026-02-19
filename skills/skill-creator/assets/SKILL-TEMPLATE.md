@@ -1,17 +1,18 @@
 ---
-name: {skill-name}
+name: { skill-name }
 description: >
-  {Brief description of what this skill enables}.
-  Trigger: {When the AI should load this skill - be specific}.
+    {Brief description of what this skill enables}.
+    Trigger: {When the AI should load this skill - be specific}.
 license: Apache-2.0
 metadata:
-  author: Infinitus
-  version: "1.0"
+    author: Infinitus
+    version: '1.0'
 ---
 
 ## When to Use
 
 Use this skill when:
+
 - {Condition 1}
 - {Condition 2}
 - {Condition 3}

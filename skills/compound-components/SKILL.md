@@ -3,11 +3,11 @@ name: compound-components
 description: Compound Component Pattern for building flexible, composable React components. Trigger when designing or building a reusable UI component that has multiple related parts, shared internal state, or requires flexible composition by consumers.
 license: Apache-2.0
 metadata:
-  author: Infinitus
-  version: "1.0"
-  scope: [frontend, ui]
-  auto_invoke: "Designing a reusable component with sub-parts, building a component with shared internal state, creating a component system"
-  allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
+    author: Infinitus
+    version: '1.0'
+    scope: [frontend, ui]
+    auto_invoke: 'Designing a reusable component with sub-parts, building a component with shared internal state, creating a component system'
+    allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
 ---
 
 ## When to Use vs When NOT to Use
@@ -22,12 +22,14 @@ No meaningful sub-structure?                   → NO  → Simple props
 ```
 
 **Examples from proqio-ui (all use this pattern):**
+
 - `Dialog` + `DialogTrigger` + `DialogContent` + `DialogHeader` + `DialogFooter`
 - `Form` + `FormField` + `FormItem` + `FormLabel` + `FormControl` + `FormMessage`
 - `Select` + `SelectTrigger` + `SelectContent` + `SelectList` + `SelectItem`
 - `Tabs` + `TabsList` + `TabsTrigger` + `TabsContent`
 
 **Counter-examples (simple props are correct):**
+
 - `Button`, `Badge`, `Skeleton`, `Callout` — single responsibility, no sub-structure needed
 
 ## Core Pattern

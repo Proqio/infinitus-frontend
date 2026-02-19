@@ -3,16 +3,16 @@ name: tanstack-router
 description: TanStack Router v1 patterns and best practices for type-safe client-side routing. Trigger when creating routes, navigating between pages, reading URL params or search params, setting up file-based routing, integrating route loaders with TanStack Query, or using Link, useNavigate, useParams, useSearch in React components.
 license: Apache-2.0
 metadata:
-  author: Infinitus
-  version: "1.0"
-  scope: [frontend]
-  auto_invoke:
-    - "Creating new pages or routes"
-    - "Navigating between pages"
-    - "Reading URL params or search params"
-    - "Setting up routing"
-    - "Using Link or useNavigate"
-  allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
+    author: Infinitus
+    version: '1.0'
+    scope: [frontend]
+    auto_invoke:
+        - 'Creating new pages or routes'
+        - 'Navigating between pages'
+        - 'Reading URL params or search params'
+        - 'Setting up routing'
+        - 'Using Link or useNavigate'
+    allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
 ---
 
 ## When to Use
@@ -34,15 +34,15 @@ metadata:
 
 ```typescript
 // vite.config.ts
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import { TanStackRouterVite } from "@tanstack/router-vite-plugin";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { TanStackRouterVite } from '@tanstack/router-vite-plugin';
 
 export default defineConfig({
-  plugins: [
-    TanStackRouterVite(),  // Must be BEFORE react()
-    react(),
-  ],
+    plugins: [
+        TanStackRouterVite(), // Must be BEFORE react()
+        react(),
+    ],
 });
 ```
 
@@ -149,15 +149,15 @@ import { Link } from "@tanstack/react-router";
 ### 7. Programmatic navigation
 
 ```typescript
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate } from '@tanstack/react-router';
 
 function LoginButton() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    await doLogin();
-    navigate({ to: "/dashboard" });
-  };
+    const handleLogin = async () => {
+        await doLogin();
+        navigate({ to: '/dashboard' });
+    };
 }
 ```
 
@@ -220,17 +220,19 @@ function UserDetail() {
 
 ```typescript
 // src/main.tsx — pass queryClient via router context
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
 const router = createRouter({
-  routeTree,
-  context: { queryClient }, // available in all loaders
+    routeTree,
+    context: { queryClient }, // available in all loaders
 });
 
-declare module "@tanstack/react-router" {
-  interface Register { router: typeof router }
+declare module '@tanstack/react-router' {
+    interface Register {
+        router: typeof router;
+    }
 }
 
 // Define context type in __root.tsx:
@@ -241,15 +243,15 @@ declare module "@tanstack/react-router" {
 
 ```typescript
 // src/routes/__root.tsx
-import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
-import type { QueryClient } from "@tanstack/react-query";
+import { createRootRouteWithContext, Outlet } from '@tanstack/react-router';
+import type { QueryClient } from '@tanstack/react-query';
 
 interface RouterContext {
-  queryClient: QueryClient;
+    queryClient: QueryClient;
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({
-  component: RootLayout,
+    component: RootLayout,
 });
 ```
 
@@ -257,18 +259,18 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 
 ```typescript
 // src/routes/_auth/_auth.tsx  (pathless layout route)
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, redirect } from '@tanstack/react-router';
 
-export const Route = createFileRoute("/_auth")({
-  beforeLoad: ({ context, location }) => {
-    if (!context.auth.isAuthenticated) {
-      throw redirect({
-        to: "/login",
-        search: { redirect: location.href },
-      });
-    }
-  },
-  component: AuthLayout,
+export const Route = createFileRoute('/_auth')({
+    beforeLoad: ({ context, location }) => {
+        if (!context.auth.isAuthenticated) {
+            throw redirect({
+                to: '/login',
+                search: { redirect: location.href },
+            });
+        }
+    },
+    component: AuthLayout,
 });
 ```
 
@@ -276,13 +278,10 @@ export const Route = createFileRoute("/_auth")({
 
 ```typescript
 // src/routes/heavy-page.tsx
-import { createFileRoute, lazyRouteComponent } from "@tanstack/react-router";
+import { createFileRoute, lazyRouteComponent } from '@tanstack/react-router';
 
-export const Route = createFileRoute("/heavy-page")({
-  component: lazyRouteComponent(
-    () => import("@/components/HeavyPage"),
-    "HeavyPage",
-  ),
+export const Route = createFileRoute('/heavy-page')({
+    component: lazyRouteComponent(() => import('@/components/HeavyPage'), 'HeavyPage'),
 });
 ```
 

@@ -1,19 +1,19 @@
-import { Suspense } from "react";
-import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
-import type { QueryClient } from "@tanstack/react-query";
+import { Suspense } from 'react';
+import { createRootRouteWithContext, Outlet } from '@tanstack/react-router';
+import type { QueryClient } from '@tanstack/react-query';
 
 interface RouterContext {
-  queryClient: QueryClient;
+    queryClient: QueryClient;
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({
-  component: RootLayout,
+    component: RootLayout,
 });
 
 function RootLayout() {
-  return (
-    <Suspense>
-      <Outlet />
-    </Suspense>
-  );
+    return (
+        <Suspense>
+            <Outlet />
+        </Suspense>
+    );
 }

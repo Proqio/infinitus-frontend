@@ -3,15 +3,15 @@ name: tanstack-5
 description: TanStack Query v5 patterns and best practices for server state management. Trigger when fetching data from APIs, managing server state, using useQuery, useMutation, useInfiniteQuery, useSuspenseQuery, queryOptions, or QueryClient in React components.
 license: Apache-2.0
 metadata:
-  author: Infinitus
-  version: "1.0"
-  scope: [frontend, api]
-  auto_invoke:
-    - "Fetching data from API"
-    - "Using useQuery or useMutation"
-    - "Managing server state"
-    - "Creating API hooks or data fetching"
-  allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
+    author: Infinitus
+    version: '1.0'
+    scope: [frontend, api]
+    auto_invoke:
+        - 'Fetching data from API'
+        - 'Using useQuery or useMutation'
+        - 'Managing server state'
+        - 'Creating API hooks or data fetching'
+    allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
 ---
 
 ## When to Use
@@ -30,12 +30,12 @@ metadata:
 ```typescript
 // ✅ v5 — single object, no overloads
 const { data, isPending, error } = useQuery({
-  queryKey: ["users"],
-  queryFn: () => fetchUsers(),
+    queryKey: ['users'],
+    queryFn: () => fetchUsers(),
 });
 
 // ❌ OLD v4 — multiple positional arguments (removed)
-const { data } = useQuery(["users"], fetchUsers);
+const { data } = useQuery(['users'], fetchUsers);
 ```
 
 ### 2. `queryOptions` — define once, reuse everywhere (REQUIRED)
@@ -44,31 +44,31 @@ Co-locate the key and fn so they never drift apart. This is the backbone of type
 
 ```typescript
 // src/api/queries/users.ts
-import { queryOptions } from "@tanstack/react-query";
-import { fetchUser, fetchUsers } from "../fetchers/users";
+import { queryOptions } from '@tanstack/react-query';
+import { fetchUser, fetchUsers } from '../fetchers/users';
 
 export const userKeys = {
-  all: () => ["users"] as const,
-  lists: () => [...userKeys.all(), "list"] as const,
-  list: (filters: UserFilters) => [...userKeys.lists(), filters] as const,
-  details: () => [...userKeys.all(), "detail"] as const,
-  detail: (id: string) => [...userKeys.details(), id] as const,
+    all: () => ['users'] as const,
+    lists: () => [...userKeys.all(), 'list'] as const,
+    list: (filters: UserFilters) => [...userKeys.lists(), filters] as const,
+    details: () => [...userKeys.all(), 'detail'] as const,
+    detail: (id: string) => [...userKeys.details(), id] as const,
 };
 
 export const userQueries = {
-  list: (filters: UserFilters) =>
-    queryOptions({
-      queryKey: userKeys.list(filters),
-      queryFn: () => fetchUsers(filters),
-      staleTime: 30_000,
-    }),
+    list: (filters: UserFilters) =>
+        queryOptions({
+            queryKey: userKeys.list(filters),
+            queryFn: () => fetchUsers(filters),
+            staleTime: 30_000,
+        }),
 
-  detail: (id: string) =>
-    queryOptions({
-      queryKey: userKeys.detail(id),
-      queryFn: () => fetchUser(id),
-      staleTime: 60_000,
-    }),
+    detail: (id: string) =>
+        queryOptions({
+            queryKey: userKeys.detail(id),
+            queryFn: () => fetchUser(id),
+            staleTime: 60_000,
+        }),
 };
 ```
 
@@ -113,22 +113,22 @@ Side-effects after mutations live in `useMutation` callbacks, NOT in `useQuery`.
 const queryClient = useQueryClient();
 
 const updateUser = useMutation({
-  mutationFn: (payload: UpdateUserPayload) => patchUser(payload),
-  onSuccess: (data) => {
-    // Invalidate related queries to trigger a background refetch
-    queryClient.invalidateQueries({ queryKey: userKeys.all() });
-    // Or update cache directly for instant UI
-    queryClient.setQueryData(userKeys.detail(data.id).queryKey, data);
-  },
-  onError: (error) => {
-    toast.error(error.message);
-  },
+    mutationFn: (payload: UpdateUserPayload) => patchUser(payload),
+    onSuccess: (data) => {
+        // Invalidate related queries to trigger a background refetch
+        queryClient.invalidateQueries({ queryKey: userKeys.all() });
+        // Or update cache directly for instant UI
+        queryClient.setQueryData(userKeys.detail(data.id).queryKey, data);
+    },
+    onError: (error) => {
+        toast.error(error.message);
+    },
 });
 
 // Usage
-updateUser.mutate({ id: "123", name: "New Name" });
+updateUser.mutate({ id: '123', name: 'New Name' });
 // or async
-await updateUser.mutateAsync({ id: "123", name: "New Name" });
+await updateUser.mutateAsync({ id: '123', name: 'New Name' });
 ```
 
 ### 5. Replace `onSuccess`/`onError` on `useQuery` with `useEffect`
@@ -140,32 +140,32 @@ These callbacks were removed from `useQuery` in v5.
 const { data, error } = useQuery(userQueries.detail(userId));
 
 useEffect(() => {
-  if (data) analytics.track("user_viewed", { id: data.id });
+    if (data) analytics.track('user_viewed', { id: data.id });
 }, [data]);
 
 useEffect(() => {
-  if (error) logger.error("User fetch failed", error);
+    if (error) logger.error('User fetch failed', error);
 }, [error]);
 ```
 
 ### 6. Naming conventions (v5 renames)
 
-| v4 name | v5 name | Notes |
-|---|---|---|
-| `cacheTime` | `gcTime` | Garbage collection time |
-| `isLoading` | `isPending` | More accurate for initial loads |
-| `keepPreviousData` | `placeholderData: keepPreviousData` | Import helper from package |
-| `useErrorBoundary` | `throwOnError` | Reflects actual behavior |
-| `status: "loading"` | `status: "pending"` | Consistent naming |
+| v4 name             | v5 name                             | Notes                           |
+| ------------------- | ----------------------------------- | ------------------------------- |
+| `cacheTime`         | `gcTime`                            | Garbage collection time         |
+| `isLoading`         | `isPending`                         | More accurate for initial loads |
+| `keepPreviousData`  | `placeholderData: keepPreviousData` | Import helper from package      |
+| `useErrorBoundary`  | `throwOnError`                      | Reflects actual behavior        |
+| `status: "loading"` | `status: "pending"`                 | Consistent naming               |
 
 ```typescript
-import { keepPreviousData } from "@tanstack/react-query";
+import { keepPreviousData } from '@tanstack/react-query';
 
 const { data } = useQuery({
-  ...userQueries.list(filters),
-  placeholderData: keepPreviousData, // Show previous page while new page loads
-  gcTime: 5 * 60_000,               // Keep in cache 5 min after unmount
-  staleTime: 30_000,                 // Fresh for 30s
+    ...userQueries.list(filters),
+    placeholderData: keepPreviousData, // Show previous page while new page loads
+    gcTime: 5 * 60_000, // Keep in cache 5 min after unmount
+    staleTime: 30_000, // Fresh for 30s
 });
 ```
 
@@ -231,23 +231,23 @@ Mirrors `queryOptions` but for mutations. Define once, reuse in `useMutation` an
 
 ```typescript
 // src/api/mutations/users.ts
-import { mutationOptions } from "@tanstack/react-query";
-import { patchUser } from "../fetchers/users";
+import { mutationOptions } from '@tanstack/react-query';
+import { patchUser } from '../fetchers/users';
 
 export const userMutations = {
-  update: () =>
-    mutationOptions({
-      mutationKey: ["users", "update"],
-      mutationFn: (payload: UpdateUserPayload) => patchUser(payload),
-    }),
+    update: () =>
+        mutationOptions({
+            mutationKey: ['users', 'update'],
+            mutationFn: (payload: UpdateUserPayload) => patchUser(payload),
+        }),
 };
 
 // In a component — fully typed, no manual generics
 const updateUser = useMutation({
-  ...userMutations.update(),
-  onSuccess: (data) => {
-    queryClient.invalidateQueries({ queryKey: userKeys.all() });
-  },
+    ...userMutations.update(),
+    onSuccess: (data) => {
+        queryClient.invalidateQueries({ queryKey: userKeys.all() });
+    },
 });
 ```
 
@@ -256,8 +256,8 @@ const updateUser = useMutation({
 ```typescript
 // Track all in-flight mutations of a specific key
 const pendingUploads = useMutationState({
-  filters: { mutationKey: ["upload"], status: "pending" },
-  select: (mutation) => mutation.state.variables as UploadPayload,
+    filters: { mutationKey: ['upload'], status: 'pending' },
+    select: (mutation) => mutation.state.variables as UploadPayload,
 });
 ```
 
@@ -267,7 +267,7 @@ const pendingUploads = useMutationState({
 // ✅ Error is typed as Error in v5 — no casting needed
 const { error } = useQuery(userQueries.detail(id));
 if (error) {
-  console.log(error.message); // string, always
+    console.log(error.message); // string, always
 }
 
 // ❌ OLD — had to cast
@@ -323,13 +323,13 @@ src/api/
 
 ## Decision: `useQuery` vs `useSuspenseQuery`
 
-| Scenario | Hook |
-|---|---|
-| Component handles its own loading/error UI | `useQuery` |
-| Parent `<Suspense>` + `<ErrorBoundary>` exist | `useSuspenseQuery` |
-| Multiple parallel queries | `useSuspenseQueries` |
-| Paginated / infinite list | `useInfiniteQuery` |
-| Triggered by user action | `useMutation` |
+| Scenario                                      | Hook                 |
+| --------------------------------------------- | -------------------- |
+| Component handles its own loading/error UI    | `useQuery`           |
+| Parent `<Suspense>` + `<ErrorBoundary>` exist | `useSuspenseQuery`   |
+| Multiple parallel queries                     | `useSuspenseQueries` |
+| Paginated / infinite list                     | `useInfiniteQuery`   |
+| Triggered by user action                      | `useMutation`        |
 
 ## Commands
 

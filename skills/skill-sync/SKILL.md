@@ -3,13 +3,13 @@ name: skill-sync
 description: Syncs skill metadata to AGENTS.md Auto-invoke sections. Trigger when updating skill metadata (metadata.scope/metadata.auto_invoke), regenerating Auto-invoke tables, or running ./skills/skill-sync/assets/sync.sh (including --dry-run/--scope).
 license: Apache-2.0
 metadata:
-  author: infinitus
-  version: "1.0"
-  auto_invoke:
-    - "After creating/modifying a skill"
-    - "Regenerate AGENTS.md Auto-invoke tables (sync.sh)"
-    - "Troubleshoot why a skill is missing from AGENTS.md auto-invoke"
-  allowed-tools: Read, Edit, Write, Glob, Grep, Bash
+    author: infinitus
+    version: '1.0'
+    auto_invoke:
+        - 'After creating/modifying a skill'
+        - 'Regenerate AGENTS.md Auto-invoke tables (sync.sh)'
+        - 'Troubleshoot why a skill is missing from AGENTS.md auto-invoke'
+    allowed-tools: Read, Edit, Write, Glob, Grep, Bash
 ---
 
 ## Purpose
@@ -24,16 +24,16 @@ Each skill that should appear in Auto-invoke sections needs these fields in `met
 
 ```yaml
 metadata:
-  author: infinitus
-  version: "1.0"
+    author: infinitus
+    version: '1.0'
 
-  # Option A: single action
-  auto_invoke: "Creating/modifying components"
+    # Option A: single action
+    auto_invoke: 'Creating/modifying components'
 
-  # Option B: multiple actions
-  # auto_invoke:
-  #   - "Creating/modifying components"
-  #   - "Refactoring component folder placement"
+    # Option B: multiple actions
+    # auto_invoke:
+    #   - "Creating/modifying components"
+    #   - "Refactoring component folder placement"
 ```
 
 ---
@@ -62,9 +62,9 @@ Given this skill metadata:
 ```yaml
 # skills/infinitus-ui/SKILL.md
 metadata:
-  author: infinitus
-  version: "1.0"
-  auto_invoke: "Creating/modifying React components"
+    author: infinitus
+    version: '1.0'
+    auto_invoke: 'Creating/modifying React components'
 ```
 
 The sync script generates in `src/AGENTS.md`:
@@ -74,8 +74,8 @@ The sync script generates in `src/AGENTS.md`:
 
 When performing these actions, ALWAYS invoke the corresponding skill FIRST:
 
-| Action | Skill |
-|--------|-------|
+| Action                              | Skill          |
+| ----------------------------------- | -------------- |
 | Creating/modifying React components | `infinitus-ui` |
 ```
 

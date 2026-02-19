@@ -3,11 +3,11 @@ name: react-hook-form
 description: React Hook Form v7 best practices with proqio-ui Form components. Trigger when creating forms, using useForm, FormField, FormItem, FormLabel, FormControl, FormMessage, handling form validation, or integrating react-hook-form with proqio-ui.
 license: Apache-2.0
 metadata:
-  author: Infinitus
-  version: "1.0"
-  scope: [frontend, ui]
-  auto_invoke: "Creating forms, using useForm, using FormField or FormControl, handling form submission, form validation, form with proqio-ui"
-  allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
+    author: Infinitus
+    version: '1.0'
+    scope: [frontend, ui]
+    auto_invoke: 'Creating forms, using useForm, using FormField or FormControl, handling form submission, form validation, form with proqio-ui'
+    allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
 ---
 
 ## Critical Rules
@@ -93,17 +93,17 @@ function MyForm() {
 
 ## proqio-ui Form Components Reference
 
-| Component | Purpose | Notes |
-|-----------|---------|-------|
-| `Form` | Root context provider | Spread `{...form}` from `useForm()` |
-| `FormField` | Connects a field to RHF Controller | Requires `control` + `name` + `render` |
-| `FormItem` | Wrapper div with spacing | Contains label + control + message |
-| `FormLabel` | Styled label with error state | Automatically marks red on error |
-| `FormLabelOptionalText` | Appends "(optional)" to label | `<FormLabel>Email<FormLabelOptionalText /></FormLabel>` |
-| `FormControl` | Radix Slot connecting to field | Passes `aria-*` and `id` automatically |
-| `FormDescription` | Helper text below control | Shown always (not an error) |
-| `FormMessage` | Error message | Auto-displays `field.error.message`; renders `null` when no error |
-| `useFormField` | Hook for custom field components | Exposes `invalid`, `error`, `id`, etc. |
+| Component               | Purpose                            | Notes                                                             |
+| ----------------------- | ---------------------------------- | ----------------------------------------------------------------- |
+| `Form`                  | Root context provider              | Spread `{...form}` from `useForm()`                               |
+| `FormField`             | Connects a field to RHF Controller | Requires `control` + `name` + `render`                            |
+| `FormItem`              | Wrapper div with spacing           | Contains label + control + message                                |
+| `FormLabel`             | Styled label with error state      | Automatically marks red on error                                  |
+| `FormLabelOptionalText` | Appends "(optional)" to label      | `<FormLabel>Email<FormLabelOptionalText /></FormLabel>`           |
+| `FormControl`           | Radix Slot connecting to field     | Passes `aria-*` and `id` automatically                            |
+| `FormDescription`       | Helper text below control          | Shown always (not an error)                                       |
+| `FormMessage`           | Error message                      | Auto-displays `field.error.message`; renders `null` when no error |
+| `useFormField`          | Hook for custom field components   | Exposes `invalid`, `error`, `id`, etc.                            |
 
 ## Input Components per Field Type
 
@@ -331,18 +331,20 @@ await form.trigger('email');
 ## Cross-Field Validation (superRefine)
 
 ```typescript
-const schema = z.object({
-  password: z.string().min(8),
-  confirmPassword: z.string(),
-}).superRefine((data, ctx) => {
-  if (data.password !== data.confirmPassword) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
-      message: "Passwords don't match",
-      path: ['confirmPassword'],
+const schema = z
+    .object({
+        password: z.string().min(8),
+        confirmPassword: z.string(),
+    })
+    .superRefine((data, ctx) => {
+        if (data.password !== data.confirmPassword) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Passwords don't match",
+                path: ['confirmPassword'],
+            });
+        }
     });
-  }
-});
 ```
 
 ## Async Submission with Error Handling
@@ -377,13 +379,13 @@ async function onSubmit(data: FormData) {
 ```typescript
 // Use a single form across steps — only validate the current step's fields
 const form = useForm<FormData>({
-  resolver: zodResolver(schema),
-  mode: 'onChange',
+    resolver: zodResolver(schema),
+    mode: 'onChange',
 });
 
 async function handleNextStep(fieldsToValidate: (keyof FormData)[]) {
-  const valid = await form.trigger(fieldsToValidate);
-  if (valid) setStep(step + 1);
+    const valid = await form.trigger(fieldsToValidate);
+    if (valid) setStep(step + 1);
 }
 ```
 
@@ -391,12 +393,12 @@ async function handleNextStep(fieldsToValidate: (keyof FormData)[]) {
 
 ```typescript
 useForm({
-  resolver: zodResolver(schema),
-  mode: 'onBlur',       // validate on blur (recommended for UX)
-  // mode: 'onChange',  // validate on every keystroke
-  // mode: 'onSubmit',  // validate only on submit (default)
-  // mode: 'all',       // validate on both blur and change
-})
+    resolver: zodResolver(schema),
+    mode: 'onBlur', // validate on blur (recommended for UX)
+    // mode: 'onChange',  // validate on every keystroke
+    // mode: 'onSubmit',  // validate only on submit (default)
+    // mode: 'all',       // validate on both blur and change
+});
 ```
 
 ## Commands

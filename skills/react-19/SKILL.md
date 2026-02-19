@@ -3,11 +3,11 @@ name: react-19
 description: React 19 patterns with React Compiler. Trigger when writing React 19 components/hooks in .tsx (React Compiler rules, hook patterns, refs as props).
 license: Apache-2.0
 metadata:
-  author: Infinitus
-  version: "1.0"
-  scope: [frontend]
-  auto_invoke: "Writing React components"
-  allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
+    author: Infinitus
+    version: '1.0'
+    scope: [frontend]
+    auto_invoke: 'Writing React components'
+    allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
 ---
 
 ## No Manual Memoization (REQUIRED)
@@ -34,11 +34,11 @@ const handleClick = useCallback((id) => console.log(id), []);
 
 ```typescript
 // ✅ ALWAYS: Named imports
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from 'react';
 
 // ❌ NEVER
-import React from "react";
-import * as React from "react";
+import React from 'react';
+import * as React from 'react';
 ```
 
 ## Server Components First

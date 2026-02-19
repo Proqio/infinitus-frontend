@@ -3,11 +3,11 @@ name: tailwind-4
 description: Tailwind CSS 4 patterns and best practices. Trigger when styling with Tailwind (className, variants, cn()), especially when dynamic styling or CSS variables are involved (no var() in className).
 license: Apache-2.0
 metadata:
-  author: Infinitus
-  version: "1.0"
-  scope: [frontend, ui]
-  auto_invoke: "Working with Tailwind classes"
-  allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
+    author: Infinitus
+    version: '1.0'
+    scope: [frontend, ui]
+    auto_invoke: 'Working with Tailwind classes'
+    allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
 ---
 
 ## Styling Decision Tree
@@ -49,11 +49,11 @@ Library can't use class?→ style prop with var() constants
 ## The cn() Utility
 
 ```typescript
-import { clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+    return twMerge(clsx(inputs));
 }
 ```
 

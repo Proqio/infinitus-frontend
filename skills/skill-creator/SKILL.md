@@ -3,21 +3,23 @@ name: skill-creator
 description: Creates new AI agent skills following the Agent Skills spec. Trigger when user asks to create a new skill, add agent instructions, or document patterns for AI.
 license: Apache-2.0
 metadata:
-  author: Infinitus
-  version: "1.0"
-  auto_invoke: "Creating new skills"
-  allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
+    author: Infinitus
+    version: '1.0'
+    auto_invoke: 'Creating new skills'
+    allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
 ---
 
 ## When to Create a Skill
 
 Create a skill when:
+
 - A pattern is used repeatedly and AI needs guidance
 - Project-specific conventions differ from generic best practices
 - Complex workflows need step-by-step instructions
 - Decision trees help AI choose the right approach
 
 **Don't create a skill when:**
+
 - Documentation already exists (create a reference instead)
 - Pattern is trivial or self-explanatory
 - It's a one-off task
@@ -40,7 +42,7 @@ skills/{skill-name}/
 
 ## SKILL.md Template
 
-```markdown
+````markdown
 ---
 name: {skill-name}
 description: {Description of what this skill does}. Trigger {When the AI should load this skill}.
@@ -67,11 +69,13 @@ metadata:
 ```bash
 {Common commands}
 ```
+````
 
 ## Resources
 
 - **Templates**: See [assets/](assets/) for {description}
 - **Documentation**: See [references/](references/) for local docs
+
 ```
 
 ---
@@ -90,11 +94,13 @@ metadata:
 ## Decision: assets/ vs references/
 
 ```
-Need code templates?        → assets/
-Need JSON schemas?          → assets/
-Need example configs?       → assets/
-Link to existing docs?      → references/
-Link to external guides?    → references/ (with local path)
+
+Need code templates? → assets/
+Need JSON schemas? → assets/
+Need example configs? → assets/
+Link to existing docs? → references/
+Link to external guides? → references/ (with local path)
+
 ```
 
 **Key Rule**: `references/` should point to LOCAL files (`docs/developer-guide/*.mdx`), not web URLs.
@@ -104,10 +110,12 @@ Link to external guides?    → references/ (with local path)
 ## Decision: infinitus-Specific vs Generic
 
 ```
-Patterns apply to ANY project?     → Generic skill (e.g., typescript)
-Patterns are infinitus-specific?     → infinitus-{name} skill
-Generic skill needs infinitus info?  → Add references/ pointing to infinitus docs
-```
+
+Patterns apply to ANY project? → Generic skill (e.g., typescript)
+Patterns are infinitus-specific? → infinitus-{name} skill
+Generic skill needs infinitus info? → Add references/ pointing to infinitus docs
+
+````
 
 ---
 
@@ -146,7 +154,7 @@ After creating the skill, add it to `AGENTS.md`:
 
 ```markdown
 | `{skill-name}` | {Description} | [SKILL.md](skills/{skill-name}/SKILL.md) |
-```
+````
 
 ---
 

@@ -3,11 +3,11 @@ name: react-compiler
 description: React Compiler (build-time optimizer) patterns, Rules of React, and best practices for React 19. Trigger when enabling React Compiler, migrating away from manual memoization, debugging compilation errors, or writing components that must be compiler-compatible.
 license: Apache-2.0
 metadata:
-  author: Infinitus
-  version: "1.0"
-  scope: [frontend]
-  auto_invoke: "Optimizing React components, enabling React Compiler, migrating manual memoization"
-  allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
+    author: Infinitus
+    version: '1.0'
+    scope: [frontend]
+    auto_invoke: 'Optimizing React components, enabling React Compiler, migrating manual memoization'
+    allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
 ---
 
 ## What React Compiler Does
@@ -60,16 +60,16 @@ function BrokenSort({ items }) {
 ```typescript
 // ✅ Hooks always at top level
 function Form() {
-  const [value, setValue] = useState("");
-  const [error, setError] = useState(null);
-  // ...
+    const [value, setValue] = useState('');
+    const [error, setError] = useState(null);
+    // ...
 }
 
 // ❌ Hooks inside conditions/loops — compiler will skip this file
 function BrokenForm({ isEditing }) {
-  if (isEditing) {
-    const [value, setValue] = useState(""); // ILLEGAL
-  }
+    if (isEditing) {
+        const [value, setValue] = useState(''); // ILLEGAL
+    }
 }
 ```
 
@@ -134,11 +134,11 @@ Some `useMemo`/`useCallback` usage remains correct even with the compiler:
 ```typescript
 // ✅ Needed: prevents effect from re-running on every render
 function Dashboard({ filters }) {
-  const query = useMemo(() => buildQuery(filters), [filters]);
+    const query = useMemo(() => buildQuery(filters), [filters]);
 
-  useEffect(() => {
-    fetchData(query);
-  }, [query]); // stable reference required here
+    useEffect(() => {
+        fetchData(query);
+    }, [query]); // stable reference required here
 }
 ```
 
@@ -158,8 +158,8 @@ Use `"use no memo"` to exclude a single component or hook when the compiler prod
 
 ```typescript
 function ProblematicComponent() {
-  "use no memo"; // compiler skips this function only
-  // ... component with unusual patterns
+    'use no memo'; // compiler skips this function only
+    // ... component with unusual patterns
 }
 ```
 
@@ -187,17 +187,17 @@ Files are skipped (not broken) when the compiler can't verify safety. Skipped fi
 
 ```typescript
 // vite.config.ts
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  plugins: [
-    react({
-      babel: {
-        plugins: [["babel-plugin-react-compiler", {}]],
-      },
-    }),
-  ],
+    plugins: [
+        react({
+            babel: {
+                plugins: [['babel-plugin-react-compiler', {}]],
+            },
+        }),
+    ],
 });
 ```
 
@@ -205,14 +205,14 @@ export default defineConfig({
 
 ## Decision Table
 
-| Situation | Action |
-|-----------|--------|
-| New component / hook | Write without `useMemo`/`useCallback` |
-| Existing memoized code | Leave as-is; remove only after DevTools validation |
-| Effect fires on every render | Use `useMemo`/`useCallback` for the dep |
-| Compiler skips your file | Check Rules of React violations with healthcheck |
-| Compiler produces wrong output | Add `"use no memo"`, file a bug |
-| Third-party lib not compiled | Library still works; compiler optimizes your code |
+| Situation                      | Action                                             |
+| ------------------------------ | -------------------------------------------------- |
+| New component / hook           | Write without `useMemo`/`useCallback`              |
+| Existing memoized code         | Leave as-is; remove only after DevTools validation |
+| Effect fires on every render   | Use `useMemo`/`useCallback` for the dep            |
+| Compiler skips your file       | Check Rules of React violations with healthcheck   |
+| Compiler produces wrong output | Add `"use no memo"`, file a bug                    |
+| Third-party lib not compiled   | Library still works; compiler optimizes your code  |
 
 ---
 

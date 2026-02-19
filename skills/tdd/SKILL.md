@@ -3,16 +3,16 @@ name: tdd
 description: Test-Driven Development workflow for ALL infinitus components (UI, SDK, API). Trigger ALWAYS when implementing features, fixing bugs, or refactoring - regardless of component. This is a MANDATORY workflow, not optional.
 license: Apache-2.0
 metadata:
-  author: Infinitus
-  version: "1.0"
-  scope: [frontend, ui, api, test]
-  auto_invoke:
-    - "Implementing feature"
-    - "Fixing bug"
-    - "Refactoring code"
-    - "Working on task"
-    - "Modifying component"
-  allowed-tools: Read, Edit, Write, Glob, Grep, Bash, Task
+    author: Infinitus
+    version: '1.0'
+    scope: [frontend, ui, api, test]
+    auto_invoke:
+        - 'Implementing feature'
+        - 'Fixing bug'
+        - 'Refactoring code'
+        - 'Working on task'
+        - 'Modifying component'
+    allowed-tools: Read, Edit, Write, Glob, Grep, Bash, Task
 ---
 
 ## TDD Cycle (MANDATORY)
@@ -41,9 +41,9 @@ metadata:
 
 Before starting, identify which component you're working on:
 
-| Working in | Stack | Runner | Test pattern | Details |
-|------------|-------|--------|-------------|---------|
-| `src/` | TypeScript / React | Vitest + React Testing Library (RTL) | `*.test.{ts,tsx}` (co-located) | See `vitest` skill |
+| Working in | Stack              | Runner                               | Test pattern                   | Details            |
+| ---------- | ------------------ | ------------------------------------ | ------------------------------ | ------------------ |
+| `src/`     | TypeScript / React | Vitest + React Testing Library (RTL) | `*.test.{ts,tsx}` (co-located) | See `vitest` skill |
 
 ---
 
@@ -96,17 +96,17 @@ pnpm test:coverage -- src/tests
 **SRC (Vitest)**
 
 ```typescript
-describe("PriceCalculator", () => {
-  it("should return 0 for quantities below threshold", () => {
-    // Given
-    const quantity = 3;
+describe('PriceCalculator', () => {
+    it('should return 0 for quantities below threshold', () => {
+        // Given
+        const quantity = 3;
 
-    // When
-    const result = calculateDiscount(quantity);
+        // When
+        const result = calculateDiscount(quantity);
 
-    // Then
-    expect(result).toBe(0);
-  });
+        // Then
+        expect(result).toBe(0);
+    });
 });
 ```
 
@@ -142,7 +142,7 @@ Write the MINIMUM code to make the test pass. Hardcoding is valid for the first 
 ```typescript
 // Test expects calculateDiscount(100, 10) === 10
 function calculateDiscount() {
-  return 10; // FAKE IT - hardcoded is valid for first test
+    return 10; // FAKE IT - hardcoded is valid for first test
 }
 ```
 
@@ -154,28 +154,28 @@ function calculateDiscount() {
 
 Add tests with different inputs that break the hardcoded value:
 
-| Scenario | Required? |
-|----------|-----------|
-| Happy path | YES |
-| Zero/empty values | YES |
-| Boundary values | YES |
+| Scenario               | Required?         |
+| ---------------------- | ----------------- |
+| Happy path             | YES               |
+| Zero/empty values      | YES               |
+| Boundary values        | YES               |
 | Different valid inputs | YES (breaks fake) |
-| Error conditions | YES |
+| Error conditions       | YES               |
 
 **SRC:**
 
 ```typescript
-it("should calculate 10% discount", () => {
-  expect(calculateDiscount(100, 10)).toBe(10);
+it('should calculate 10% discount', () => {
+    expect(calculateDiscount(100, 10)).toBe(10);
 });
 
 // ADD - breaks the fake:
-it("should calculate 15% on 200", () => {
-  expect(calculateDiscount(200, 15)).toBe(30);
+it('should calculate 15% on 200', () => {
+    expect(calculateDiscount(200, 15)).toBe(30);
 });
 
-it("should return 0 for 0% rate", () => {
-  expect(calculateDiscount(100, 0)).toBe(0);
+it('should return 0 for 0% rate', () => {
+    expect(calculateDiscount(100, 0)).toBe(0);
 });
 ```
 
