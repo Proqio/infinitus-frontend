@@ -23,6 +23,7 @@ Use these skills for detailed patterns on-demand:
 | `zustand-5` | Persist, selectors, slices | [SKILL.md](skills/zustand-5/SKILL.md) |
 | `vitest` | Unit testing, React Testing Library | [SKILL.md](skills/vitest/SKILL.md) |
 | `tdd` | Test-Driven Development workflow | [SKILL.md](skills/tdd/SKILL.md) |
+| `performance` | Lazy loading, code splitting, Vite chunks, TanStack Query staleTime, Zustand selectors, virtualization | [SKILL.md](skills/performance/SKILL.md) |
 
 ### Infinitus-Specific Skills
 | Skill | Description | URL |
@@ -37,10 +38,13 @@ When performing these actions, ALWAYS invoke the corresponding skill FIRST:
 
 | Action | Skill |
 |--------|-------|
+| Adding virtualization to long lists or tables | `performance` |
+| Configuring Vite build | `performance` |
 | Creating API hooks or data fetching | `tanstack-5` |
 | Creating Zod schemas | `zod-4` |
 | Creating forms, using useForm, using FormField or FormControl, handling form submission, form validation, form with proqio-ui | `react-hook-form` |
 | Creating index.ts, writing re-exports, importing from a folder path | `no-barrel-files` |
+| Creating new pages or routes | `performance` |
 | Designing a reusable component with sub-parts, building a component with shared internal state, creating a component system | `compound-components` |
 | Fetching data from API | `tanstack-5` |
 | Fixing bug | `tdd` |
@@ -48,6 +52,8 @@ When performing these actions, ALWAYS invoke the corresponding skill FIRST:
 | Managing server state | `tanstack-5` |
 | Modifying component | `tdd` |
 | Optimizing React components, enabling React Compiler, migrating manual memoization | `react-compiler` |
+| Optimizing bundle size or build configuration | `performance` |
+| Optimizing frontend performance | `performance` |
 | Refactoring code | `tdd` |
 | Using Zustand stores | `zustand-5` |
 | Using proqio-ui components, building UI components, importing from proqio-ui | `proqio-ui` |
