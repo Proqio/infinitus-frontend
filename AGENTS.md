@@ -27,6 +27,7 @@ Use these skills for detailed patterns on-demand:
 ### Infinitus-Specific Skills
 | Skill | Description | URL |
 |-------|-------------|-----|
+| `proqio-ui` | Proqio UI component library — all 36+ components, variants, compound patterns, form integration | [SKILL.md](skills/proqio-ui/SKILL.md) |
 | `skill-creator` | Create new AI agent skills | [SKILL.md](skills/skill-creator/SKILL.md) |
 | `skill-sync` | Create/modify new AI agent skills | [SKILL.md](skills/skill-creator/SKILL.md) |
 
@@ -52,6 +53,9 @@ When performing these actions, ALWAYS invoke the corresponding skill FIRST:
 | Writing Playwright E2E tests | `playwright` |
 | Writing React components | `react-19` |
 | Writing TypeScript types/interfaces | `typescript` |
+| Using proqio-ui components | `proqio-ui` |
+| Building UI components in src/components | `proqio-ui` |
+| Choosing between custom vs library components | `proqio-ui` |
 
 ---
 
