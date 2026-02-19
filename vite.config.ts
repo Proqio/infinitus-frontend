@@ -23,6 +23,7 @@ export default defineConfig({
         // Add a new key whenever you install a large library.
         manualChunks: {
           "vendor-react": ["react", "react-dom"],
+          "vendor-router": ["@tanstack/react-router"],
           "vendor-query": ["@tanstack/react-query"],
           "vendor-zustand": ["zustand"],
           "vendor-forms": ["react-hook-form", "@hookform/resolvers", "zod"],

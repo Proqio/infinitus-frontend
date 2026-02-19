@@ -45,16 +45,21 @@ When performing these actions, ALWAYS invoke the corresponding skill FIRST:
 | Creating forms, using useForm, using FormField or FormControl, handling form submission, form validation, form with proqio-ui | `react-hook-form` |
 | Creating index.ts, writing re-exports, importing from a folder path | `no-barrel-files` |
 | Creating new pages or routes | `performance` |
+| Creating new pages or routes | `tanstack-router` |
 | Designing a reusable component with sub-parts, building a component with shared internal state, creating a component system | `compound-components` |
 | Fetching data from API | `tanstack-5` |
 | Fixing bug | `tdd` |
 | Implementing feature | `tdd` |
 | Managing server state | `tanstack-5` |
 | Modifying component | `tdd` |
+| Navigating between pages | `tanstack-router` |
 | Optimizing React components, enabling React Compiler, migrating manual memoization | `react-compiler` |
 | Optimizing bundle size or build configuration | `performance` |
 | Optimizing frontend performance | `performance` |
+| Reading URL params or search params | `tanstack-router` |
 | Refactoring code | `tdd` |
+| Setting up routing | `tanstack-router` |
+| Using Link or useNavigate | `tanstack-router` |
 | Using Zustand stores | `zustand-5` |
 | Using proqio-ui components, building UI components, importing from proqio-ui | `proqio-ui` |
 | Using useQuery or useMutation | `tanstack-5` |
