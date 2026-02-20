@@ -136,15 +136,28 @@ proqio-ui styles come from **Tailwind 4 scanning**, NOT a separate CSS import. T
 
 ---
 
-## Auto-invoke Skills
+### Auto-invoke Skills
 
-| Action                              | Skill        |
-| ----------------------------------- | ------------ |
-| Using any proqio-ui component       | `proqio-ui`  |
-| Writing React components            | `react-19`   |
-| Working with Tailwind classes       | `tailwind-4` |
-| Writing TypeScript types            | `typescript` |
-| Implementing or modifying component | `tdd`        |
+When performing these actions, ALWAYS invoke the corresponding skill FIRST:
+
+| Action | Skill |
+|--------|-------|
+| Building a component with shared internal state across sub-components | `compound-components` |
+| Creating Zod schemas | `zod-4` |
+| Creating a layout or feature component with multiple named exports | `compound-components` |
+| Creating forms, using useForm, using FormField or FormControl, handling form submission, form validation, form with proqio-ui | `react-hook-form` |
+| Creating index.ts, writing re-exports, importing from a folder path | `no-barrel-files` |
+| Designing a reusable component with sub-parts or named sections (e.g. Header + HeaderBrand + HeaderSection) | `compound-components` |
+| Fixing bug | `tdd` |
+| Implementing feature | `tdd` |
+| Modifying component | `tdd` |
+| Refactoring code | `tdd` |
+| Using Zustand stores | `zustand-5` |
+| Using proqio-ui components, building UI components, importing from proqio-ui | `proqio-ui` |
+| Working on task | `tdd` |
+| Working with Tailwind classes | `tailwind-4` |
+| Writing Playwright E2E tests | `playwright` |
+| Writing TypeScript types/interfaces | `typescript` |
 
 ---
 

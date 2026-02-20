@@ -6,7 +6,10 @@ metadata:
     author: Infinitus
     version: '1.0'
     scope: [frontend, ui]
-    auto_invoke: 'Designing a reusable component with sub-parts, building a component with shared internal state, creating a component system'
+    auto_invoke:
+        - 'Designing a reusable component with sub-parts or named sections (e.g. Header + HeaderBrand + HeaderSection)'
+        - 'Building a component with shared internal state across sub-components'
+        - 'Creating a layout or feature component with multiple named exports'
     allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
 ---
 
