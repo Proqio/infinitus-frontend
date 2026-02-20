@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { ChevronsLeft, ChevronsRight, House } from 'lucide-react';
+import { ChevronsLeft, ChevronsRight, House, LayoutDashboard } from 'lucide-react';
 import {
     Sidebar,
     SidebarContent,
@@ -20,7 +20,10 @@ type NavItem = {
     Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 };
 
-const navItems: NavItem[] = [{ label: 'Home', to: '/', Icon: House }];
+const navItems: NavItem[] = [
+    { label: 'Home', to: '/', Icon: House },
+    { label: 'Dashboard', to: '/dashboard', Icon: LayoutDashboard },
+];
 
 export function AppSidebar() {
     const { state } = useSidebar();
