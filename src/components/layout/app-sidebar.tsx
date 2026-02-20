@@ -1,5 +1,5 @@
-import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, HomeIcon } from '@heroicons/react/24/outline';
 import { Link } from '@tanstack/react-router';
+import { ChevronsLeft, ChevronsRight, House } from 'lucide-react';
 import {
     Sidebar,
     SidebarContent,
@@ -20,20 +20,23 @@ type NavItem = {
     Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 };
 
-const navItems: NavItem[] = [{ label: 'Home', to: '/', Icon: HomeIcon }];
+const navItems: NavItem[] = [{ label: 'Home', to: '/', Icon: House }];
 
 export function AppSidebar() {
     const { state } = useSidebar();
     const isExpanded = state === 'expanded';
 
     return (
-        <Sidebar collapsible="icon" className="absolute h-(--content-height) max-h-(--content-height)">
+        <Sidebar
+            collapsible="icon"
+            className="absolute h-(--content-height) max-h-(--content-height)"
+        >
             <SidebarHeader className={cn('flex', isExpanded ? 'justify-end' : 'justify-center')}>
                 <SidebarTrigger>
                     {isExpanded ? (
-                        <ChevronDoubleLeftIcon className="size-4" />
+                        <ChevronsLeft className="size-4" />
                     ) : (
-                        <ChevronDoubleRightIcon className="size-4" />
+                        <ChevronsRight className="size-4" />
                     )}
                 </SidebarTrigger>
             </SidebarHeader>
@@ -41,7 +44,11 @@ export function AppSidebar() {
                 <SidebarMenu>
                     {navItems.map(({ label, to, Icon }) => (
                         <SidebarMenuItem key={to}>
-                            <SidebarMenuButton asChild tooltip={label} className="group-data-[collapsible=icon]:mx-auto">
+                            <SidebarMenuButton
+                                asChild
+                                tooltip={label}
+                                className="group-data-[collapsible=icon]:mx-auto"
+                            >
                                 <Link to={to}>
                                     <Icon className="size-4" />
                                     <span>{label}</span>
