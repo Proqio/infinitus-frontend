@@ -44,17 +44,47 @@ invoke skill: proqio-ui
 ```
 src/components/
 ├── {feature}/           # Feature-scoped components
-│   ├── ComponentName.tsx
-│   └── index.ts
+│   └── component-name.tsx
 └── ui/                  # Shared wrappers (only if proqio-ui needs project-specific config)
 ```
 
 **Rules:**
 
-- One component per file, named identically to the export
+- One component per file, filename in kebab-case (`user-avatar.tsx`)
 - Use named exports — no default exports
 - Props interface name: `{ComponentName}Props`
+- No `index.ts` barrel files — import directly from the source file
 - Co-locate tests in `src/tests/` mirroring this structure
+
+---
+
+## Component-Scoped Types, Constants and Utils
+
+Keep component-specific code **flat inside the component folder** — no nested `libs/` or `helpers/` subfolders.
+
+```
+src/components/header/
+  header.tsx
+  header.types.ts       # interfaces and types exclusive to this component
+  header.constants.ts   # constants exclusive to this component
+  header.utils.ts       # utility functions exclusive to this component
+```
+
+**When to extract** (only if the component file is growing hard to read):
+
+| What | Extract when |
+|------|-------------|
+| Interfaces / types | 3+ non-trivial interfaces, or they are reused across sibling files |
+| Constants | 3+ named constants, or a large config object |
+| Utils | A function with meaningful logic that could be unit-tested independently |
+
+**When NOT to extract:**
+
+- A 2–4 field interface used only in one place — keep it in `component.tsx`
+- A one-liner constant — keep it inline
+- Do not create the file preemptively; extract only when the component file becomes hard to navigate
+
+**Generic utilities** (used across more than one component) belong in `src/utils/`, not in a component folder.
 
 ---
 
